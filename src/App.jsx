@@ -1,11 +1,12 @@
 import "./App.css";
 import LoginPage from "./components/Authentication/LoginPage";
-// import CartPage from "./components/Cart/CartPage";
-// import MyOrderPage from "./components/MyOrder/MyOrderPage";
-// import HomePage from "./components/Home/HomePage";
+import SignupPage from "./components/Authentication/SignupPage";
+import CartPage from "./components/Cart/CartPage";
+import MyOrderPage from "./components/MyOrder/MyOrderPage";
+import HomePage from "./components/Home/HomePage";
 import Navbar from "./components/Navbar/Navbar";
-// import SingleProductPage from "./components/SingleProduct/SingleProductPage";
-// import ProductsPage from "./components/Products/ProductsPage";
+import SingleProductPage from "./components/SingleProduct/SingleProductPage";
+import ProductsPage from "./components/Products/ProductsPage";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         {/* <SingleProductPage /> */}
         {/* <CartPage /> */}
         {/* <MyOrderPage /> */}
-        <LoginPage />
+        {/* <LoginPage /> */}
+        <SignupPage />
       </main>
     </div>
   );
