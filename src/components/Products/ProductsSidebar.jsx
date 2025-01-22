@@ -12,12 +12,12 @@ const ProductsSidebar = () => {
       <div className="category_links">
         {error && <em className="form_error">{error}</em>}
         {categories &&
-          categories.map((category) => (
+          categories.map((c) => (
             <LinkWithIcon
-              key={category._id}
-              title={category.name}
-              link={`/products?category=${category.name}`}
-              emoji={`http://localhost:5000/category/${category.image}`}
+              key={c._id}
+              title={c.name}
+              link={`/products?category=${c.name}`}
+              emoji={`http://localhost:5000/category/${c.image}`}
               sidebar={true}
             />
           ))}
