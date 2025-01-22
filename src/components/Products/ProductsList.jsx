@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import useData from "../../Hook/useData";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import { useSearchParams } from "react-router-dom";
+import Pagination from "../Common/Pagination";
 
 const ProductsList = () => {
   const [search, setSearch] = useSearchParams(); //요청주소 뒤의 쿼리스트링
@@ -15,6 +16,7 @@ const ProductsList = () => {
     [category, page]
   );
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  console.log(data);
 
   const handlePageChange = (page) => {
     //기존의 검색한 카테고리가 있으면 유지하면서 페이지만 업데이트
@@ -40,6 +42,7 @@ const ProductsList = () => {
         {isLoading && skeletons.map((n) => <ProductCardSkeleton key={n} />)}
 
         {data.products &&
+          !isLoading &&
           data.products.map((p) => (
             <ProductCard
               key={p._id}
@@ -54,6 +57,15 @@ const ProductsList = () => {
           ))}
         {/* <button onClick={() => handlePageChange(2)}>페이지 2</button> */}
       </div>
+      {/* 페이지네이션 넣기 */}
+      {data && (
+        <Pagination
+          total={data.totalProducts}
+          perPage={8}
+          onClick={handlePageChange}
+          currentPage={page}
+        />
+      )}
     </section>
   );
 };
