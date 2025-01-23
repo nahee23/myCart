@@ -10,7 +10,7 @@ const SingleProductPage = ({ addToCart }) => {
   const { id } = useParams(); //주소변수 id를 받음.
   //console.log(id);
   const { data: product, error, isLoading } = useData(`products/${id}`);
-  console.log(product);
+  //console.log(product);
   const [quantity, setQuantity] = useState(1);
   return (
     <section className="align_center single_product">
