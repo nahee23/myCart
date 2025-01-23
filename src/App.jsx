@@ -6,9 +6,18 @@ import { jwtDecode } from "jwt-decode";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]); //장바구니
   const addToCart = (product, quantity) => {
-    setCart([...cart, { product, quantity }]);
+    const updatedCart = [...cart]; //장바구니 복사
+    const productIndex = updatedCart.findIndex(
+      (item) => item.product._id === product._id
+    );
+    if (productIndex === -1) {
+      updatedCart.push({ product: product, quantity: quantity });
+    } else {
+      updatedCart[productIndex].quantity += quantity;
+    }
+    setCart(updatedCart);
   };
 
   useEffect(() => {
