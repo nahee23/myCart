@@ -38,6 +38,12 @@ function App() {
       });
   };
 
+  const removeFromCart = (id) => {
+    const oldCart = [...cart];
+    const newCart = oldCart.filter((item) => item.product._id !== id);
+    setCart(newCart);
+  };
+
   //서버에서 장바구니 정보 가져옴
   const getCart = () => {
     getCartAPI()
@@ -70,7 +76,7 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      <CartContext.Provider value={{ cart, addToCart }}>
+      <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
         <div className="app">
           <Navbar user={user} cartCount={cart.length} />
           <main>
