@@ -43,17 +43,8 @@ const ProductsList = () => {
 
         {data.products &&
           !isLoading &&
-          data.products.map((p) => (
-            <ProductCard
-              key={p._id}
-              id={p._id}
-              image={p.images[0]}
-              title={p.title}
-              price={p.price}
-              rating={p.reviews.rate}
-              ratingCounts={p.reviews.counts}
-              stock={p.stock}
-            />
+          data.products.map((product) => (
+            <ProductCard key={product._id} product={product} />
           ))}
         {/* <button onClick={() => handlePageChange(2)}>페이지 2</button> */}
       </div>

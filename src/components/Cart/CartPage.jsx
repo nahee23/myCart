@@ -11,8 +11,7 @@ const CartPage = () => {
   //console.log(cart);
   const [subTotal, setSubTotal] = useState(0);
   const user = useContext(UserContext); //useContext 로 UserContext 가져오기
-  const { cart, addToCart, removeFromCart, updateCart } =
-    useContext(CartContext);
+  const { cart, removeFromCart, updateCart } = useContext(CartContext);
 
   useEffect(() => {
     let total = 0;
