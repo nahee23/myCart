@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { addToCartAPI } from "./services/cartServices";
+import { addToCartAPI, getCartAPI } from "./services/cartServices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,6 +14,7 @@ setAuthToken(localStorage.getItem("token"));
 function App() {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]); //장바구니
+
   const addToCart = (product, quantity) => {
     const updatedCart = [...cart]; //장바구니 복사
     const productIndex = updatedCart.findIndex(
@@ -25,7 +26,7 @@ function App() {
       updatedCart[productIndex].quantity += quantity;
     }
     setCart(updatedCart);
-
+    //DB에 장바구니(cart) 저장 (유저별) {제품ID, 개수}
     addToCartAPI(product._id, quantity)
       .then((res) => {
         toast.success("상품 추가 성공!");
@@ -34,6 +35,23 @@ function App() {
         toast.error("상품 추가에 실패했습니다.");
       });
   };
+
+  //서버에서 장바구니 정보 가져옴
+  const getCart = () => {
+    getCartAPI()
+      .then((res) => {
+        setCart(res.data);
+      })
+      .catch((err) => {
+        toast.error("카트 가져오기에 실패했습니다.");
+      });
+  };
+
+  useEffect(() => {
+    if (user) {
+      getCart();
+    }
+  }, [user]);
 
   useEffect(() => {
     try {
@@ -47,12 +65,13 @@ function App() {
       }
     } catch (error) {} //토큰이 없을 경우는 그냥 go
   }, []);
+
   return (
     <div className="app">
       <Navbar user={user} cartCount={cart.length} />
       <main>
         <ToastContainer position="bottom-right" />
-        <Routing addToCart={addToCart} />
+        <Routing addToCart={addToCart} cart={cart} />
       </main>
     </div>
   );
