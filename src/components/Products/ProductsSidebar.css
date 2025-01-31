@@ -8,3 +8,9 @@
   font-size: 26px;
   margin-bottom: 10px;
 }
+
+.category_links {
+  display: flex; /* 또는 display: grid; */
+  flex-direction: column; /* 세로 정렬일 경우 */
+  gap: 20px; /* 요소들 사이 간격 조절 */
+}
