@@ -10,13 +10,14 @@ const ProductsList = () => {
   const [search, setSearch] = useSearchParams(); //요청주소 뒤의 쿼리스트링
   const category = search.get("category"); //category=값
   const page = search.get("page"); // 몇번째 페이지
+  const searchQuery = search.get("search");
   const { data, error, isLoading } = useData(
     "products",
-    { params: { category, page } },
-    [category, page]
+    { params: { search: searchQuery, category, page } },
+    [searchQuery, category, page]
   );
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
-  console.log(data);
+  //console.log(data);
 
   const handlePageChange = (page) => {
     //기존의 검색한 카테고리가 있으면 유지하면서 페이지만 업데이트
